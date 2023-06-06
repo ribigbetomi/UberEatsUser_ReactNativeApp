@@ -12,9 +12,9 @@ const OrderLiveUpdates = ({ id }) => {
 
   const mapRef = useRef(null);
 
-  useEffect(() => {
-    DataStore.query(Order, id).then(setOrder);
-  }, []);
+  // useEffect(() => {
+  //   DataStore.query(Order, id).then(setOrder);
+  // }, []);
 
   useEffect(() => {
     if (!order) {
@@ -29,11 +29,11 @@ const OrderLiveUpdates = ({ id }) => {
     return () => subscription.unsubscribe();
   }, [order]);
 
-  useEffect(() => {
-    if (order?.orderCourierId) {
-      DataStore.query(Courier, order.orderCourierId).then(setCourier);
-    }
-  }, [order?.orderCourierId]);
+  // useEffect(() => {
+  //   if (order?.orderCourierId) {
+  //     DataStore.query(Courier, order.orderCourierId).then(setCourier);
+  //   }
+  // }, [order?.orderCourierId]);
 
   useEffect(() => {
     if (courier?.lng && courier?.lat) {
