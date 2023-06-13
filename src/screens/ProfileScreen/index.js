@@ -8,11 +8,14 @@ import { useNavigation } from "@react-navigation/native";
 
 const Profile = () => {
   const { dbUser } = useAuthContext();
+  console.log(JSON.stringify(dbUser, null, 2), "dbUserProfileScreen");
 
   const [name, setName] = useState(dbUser?.name || "");
   const [address, setAddress] = useState(dbUser?.address || "");
-  const [lat, setLat] = useState(dbUser?.lat + "" || "0");
-  const [lng, setLng] = useState(dbUser?.lng + "" || "0");
+  const [lat, setLat] = useState(dbUser ? dbUser.lat + "" : "");
+  const [lng, setLng] = useState(dbUser ? dbUser.lng + "" : "");
+  // const [lat, setLat] = useState(dbUser?.lat + "" || "0");
+  // const [lng, setLng] = useState(dbUser?.lng + "" || "0");
 
   const { sub, setDbUser } = useAuthContext();
 
@@ -21,10 +24,10 @@ const Profile = () => {
   const onSave = async () => {
     if (dbUser) {
       await updateUser();
+      navigation.goBack();
     } else {
       await createUser();
     }
-    navigation.goBack();
   };
 
   const updateUser = async () => {
@@ -41,6 +44,7 @@ const Profile = () => {
 
   const createUser = async () => {
     try {
+      console.log("createUser");
       const user = await DataStore.save(
         new User({
           name,
@@ -76,7 +80,7 @@ const Profile = () => {
         onChangeText={setLat}
         placeholder="Latitude"
         style={styles.input}
-        keyboardType="numeric"
+        // keyboardType="numeric"
       />
       <TextInput
         value={lng}
@@ -86,7 +90,7 @@ const Profile = () => {
       />
       <Button onPress={onSave} title="Save" />
       <Text
-        onPress={() => Auth.signOut()}
+        // onPress={() => Auth.signOut()}
         style={{ textAlign: "center", color: "red", margin: 10 }}
       >
         Sign out

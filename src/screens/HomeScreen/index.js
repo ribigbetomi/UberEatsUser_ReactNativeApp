@@ -6,7 +6,7 @@ import { Restaurant } from "../../models";
 
 export default function HomeScreen() {
   const [restaurants, setRestaurants] = useState([]);
-  console.log(JSON.stringify(restaurants, null, 2), 'restaurants')
+  // console.log(JSON.stringify(restaurants, null, 2), 'restaurants')
 
   useEffect(() => {
     DataStore.query(Restaurant).then(setRestaurants);

@@ -7,12 +7,13 @@ const AuthContext = createContext({});
 const AuthContextProvider = ({ children }) => {
   const [authUser, setAuthUser] = useState(null);
   const [dbUser, setDbUser] = useState(null);
-  const sub = authUser?.attributes?.sub;
+  const sub = authUser?.attributes?.sub || null;
 
   console.log(JSON.stringify(dbUser, null, 2), "dbUser");
-  // useEffect(() => {
-  //   Auth.currentAuthenticatedUser({ bypassCache: true }).then(setAuthUser);
-  // }, []);
+  useEffect(() => {
+    Auth.currentAuthenticatedUser().then(setAuthUser);
+    // Auth.currentAuthenticatedUser({ bypassCache: true }).then(setAuthUser);
+  }, []);
 
   // useEffect(() => {
   //   DataStore.query(User, (user) => user.sub("eq", sub)).then((users) =>

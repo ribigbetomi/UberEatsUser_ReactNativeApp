@@ -23,13 +23,13 @@ const BasketContextProvider = ({ children }) => {
   //   ).then((baskets) => setBasket(baskets[0]));
   // }, [dbUser, restaurant]);
 
-  useEffect(() => {
-    if (basket) {
-      DataStore.query(BasketDish, (bd) => bd.basketID("eq", basket.id)).then(
-        setBasketDishes
-      );
-    }
-  }, [basket]);
+  // useEffect(() => {
+  //   if (basket) {
+  //     DataStore.query(BasketDish, (bd) => bd.basketID("eq", basket.id)).then(
+  //       setBasketDishes
+  //     );
+  //   }
+  // }, [basket]);
 
   const addDishToBasket = async (dish, quantity) => {
     // get the existing basket or create a new one
